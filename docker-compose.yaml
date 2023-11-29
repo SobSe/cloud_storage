@@ -1,0 +1,18 @@
+version: '1'
+
+services:
+  cloud_storage_backend:
+    image: 'cloud_storage:latest'
+    network_mode: host
+    ports:
+      - '5500:5500'
+    depends_on:
+      - postgresdb
+  postgresdb:
+    image: 'postgres'
+    volumes:
+      - /pg_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
